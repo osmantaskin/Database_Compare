@@ -21,5 +21,6 @@
         public string SQL { get; set; }
 
         public bool Checked = false;
+        //test
     }
 }
