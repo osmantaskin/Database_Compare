@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database_Compare.File
 {
-    class tLog
+    class tLog 
     {
         internal static bool LogType(string Message, string Type)
         {
@@ -23,7 +23,7 @@ namespace Database_Compare.File
                 string path = "";
                 if (Type == "ERROR")
                 {
-                    path = Environment.CurrentDirectory + @"\Logs\" + DateTime.Now.ToShortDateString() + "_" + Type + ".log";
+                    path = Environment.CurrentDirectory + @"\Logs\" + DateTime.Now.ToString("dd.MM.yyyy") + "_" + Type + ".log";
                 }
                 else
                 {
@@ -36,7 +36,7 @@ namespace Database_Compare.File
                 fs.Close();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }

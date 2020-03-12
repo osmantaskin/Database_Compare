@@ -64,6 +64,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtUserNameKaynak = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkFunction = new System.Windows.Forms.CheckBox();
+            this.chkTrigger = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -74,8 +76,15 @@
             this.txtUserNameHedef = new System.Windows.Forms.TextBox();
             this.btnRunExecSql = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.chkTileBaslayanlar = new System.Windows.Forms.CheckBox();
+            this.chkKolonBoyutuBuyukse = new System.Windows.Forms.CheckBox();
             this.txtTableSearch = new System.Windows.Forms.TextBox();
+            this.chkTileBaslayanlar = new System.Windows.Forms.CheckBox();
+            this.lblProsedurFarki = new System.Windows.Forms.Label();
+            this.lblViewFarki = new System.Windows.Forms.Label();
+            this.lblFunctionFarki = new System.Windows.Forms.Label();
+            this.btnConstraintUpdate = new System.Windows.Forms.Button();
+            this.chkHepsi = new System.Windows.Forms.CheckBox();
+            this.lblTriggerFarki = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -84,22 +93,26 @@
             // 
             // listViewTabloFarklar
             // 
+            this.listViewTabloFarklar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewTabloFarklar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader7});
             this.listViewTabloFarklar.FullRowSelect = true;
             this.listViewTabloFarklar.GridLines = true;
+            this.listViewTabloFarklar.HideSelection = false;
             this.listViewTabloFarklar.Location = new System.Drawing.Point(8, 212);
             this.listViewTabloFarklar.Name = "listViewTabloFarklar";
-            this.listViewTabloFarklar.Size = new System.Drawing.Size(235, 528);
+            this.listViewTabloFarklar.Size = new System.Drawing.Size(276, 528);
             this.listViewTabloFarklar.TabIndex = 0;
             this.listViewTabloFarklar.UseCompatibleStateImageBehavior = false;
             this.listViewTabloFarklar.View = System.Windows.Forms.View.Details;
+            this.listViewTabloFarklar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewTabloFarklar_MouseClick);
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Tablo Adı";
-            this.columnHeader1.Width = 150;
+            this.columnHeader1.Text = "Tablo, SP, View, Function Adı";
+            this.columnHeader1.Width = 170;
             // 
             // columnHeader7
             // 
@@ -109,7 +122,7 @@
             // lblTabloFarki
             // 
             this.lblTabloFarki.AutoSize = true;
-            this.lblTabloFarki.Location = new System.Drawing.Point(568, 168);
+            this.lblTabloFarki.Location = new System.Drawing.Point(1069, 12);
             this.lblTabloFarki.Name = "lblTabloFarki";
             this.lblTabloFarki.Size = new System.Drawing.Size(66, 13);
             this.lblTabloFarki.TabIndex = 1;
@@ -118,7 +131,7 @@
             // lblKolonFarki
             // 
             this.lblKolonFarki.AutoSize = true;
-            this.lblKolonFarki.Location = new System.Drawing.Point(569, 187);
+            this.lblKolonFarki.Location = new System.Drawing.Point(1069, 29);
             this.lblKolonFarki.Name = "lblKolonFarki";
             this.lblKolonFarki.Size = new System.Drawing.Size(66, 13);
             this.lblKolonFarki.TabIndex = 3;
@@ -126,6 +139,8 @@
             // 
             // listViewKolonFarki
             // 
+            this.listViewKolonFarki.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewKolonFarki.CheckBoxes = true;
             this.listViewKolonFarki.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
@@ -136,9 +151,10 @@
             this.columnHeader6});
             this.listViewKolonFarki.FullRowSelect = true;
             this.listViewKolonFarki.GridLines = true;
-            this.listViewKolonFarki.Location = new System.Drawing.Point(249, 213);
+            this.listViewKolonFarki.HideSelection = false;
+            this.listViewKolonFarki.Location = new System.Drawing.Point(290, 213);
             this.listViewKolonFarki.Name = "listViewKolonFarki";
-            this.listViewKolonFarki.Size = new System.Drawing.Size(659, 527);
+            this.listViewKolonFarki.Size = new System.Drawing.Size(670, 527);
             this.listViewKolonFarki.TabIndex = 2;
             this.listViewKolonFarki.UseCompatibleStateImageBehavior = false;
             this.listViewKolonFarki.View = System.Windows.Forms.View.Details;
@@ -153,7 +169,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Kolon Adı";
-            this.columnHeader3.Width = 100;
+            this.columnHeader3.Width = 120;
             // 
             // columnHeader8
             // 
@@ -168,6 +184,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Durumu";
+            this.columnHeader5.Width = 100;
             // 
             // columnHeader6
             // 
@@ -176,18 +193,21 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(914, 212);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(966, 212);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(679, 528);
+            this.richTextBox1.Size = new System.Drawing.Size(633, 528);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
             // 
             // btnCompare
             // 
-            this.btnCompare.Location = new System.Drawing.Point(914, 12);
+            this.btnCompare.Location = new System.Drawing.Point(938, 12);
             this.btnCompare.Name = "btnCompare";
-            this.btnCompare.Size = new System.Drawing.Size(119, 89);
+            this.btnCompare.Size = new System.Drawing.Size(119, 74);
             this.btnCompare.TabIndex = 2;
             this.btnCompare.Text = "Farkları Çıkar";
             this.btnCompare.UseVisualStyleBackColor = true;
@@ -233,7 +253,7 @@
             // 
             // btnSeciliOlanlariGetir
             // 
-            this.btnSeciliOlanlariGetir.Location = new System.Drawing.Point(914, 107);
+            this.btnSeciliOlanlariGetir.Location = new System.Drawing.Point(938, 92);
             this.btnSeciliOlanlariGetir.Name = "btnSeciliOlanlariGetir";
             this.btnSeciliOlanlariGetir.Size = new System.Drawing.Size(119, 45);
             this.btnSeciliOlanlariGetir.TabIndex = 16;
@@ -244,7 +264,9 @@
             // chkConstraint
             // 
             this.chkConstraint.AutoSize = true;
-            this.chkConstraint.Location = new System.Drawing.Point(3, 49);
+            this.chkConstraint.Checked = true;
+            this.chkConstraint.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConstraint.Location = new System.Drawing.Point(4, 74);
             this.chkConstraint.Name = "chkConstraint";
             this.chkConstraint.Size = new System.Drawing.Size(73, 17);
             this.chkConstraint.TabIndex = 17;
@@ -255,7 +277,9 @@
             // chkStoredProcedure
             // 
             this.chkStoredProcedure.AutoSize = true;
-            this.chkStoredProcedure.Location = new System.Drawing.Point(4, 95);
+            this.chkStoredProcedure.Checked = true;
+            this.chkStoredProcedure.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkStoredProcedure.Location = new System.Drawing.Point(4, 118);
             this.chkStoredProcedure.Name = "chkStoredProcedure";
             this.chkStoredProcedure.Size = new System.Drawing.Size(109, 17);
             this.chkStoredProcedure.TabIndex = 18;
@@ -267,7 +291,7 @@
             this.chkTable.AutoSize = true;
             this.chkTable.Checked = true;
             this.chkTable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTable.Location = new System.Drawing.Point(3, 3);
+            this.chkTable.Location = new System.Drawing.Point(4, 8);
             this.chkTable.Name = "chkTable";
             this.chkTable.Size = new System.Drawing.Size(53, 17);
             this.chkTable.TabIndex = 19;
@@ -278,7 +302,9 @@
             // chkView
             // 
             this.chkView.AutoSize = true;
-            this.chkView.Location = new System.Drawing.Point(3, 118);
+            this.chkView.Checked = true;
+            this.chkView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkView.Location = new System.Drawing.Point(4, 140);
             this.chkView.Name = "chkView";
             this.chkView.Size = new System.Drawing.Size(49, 17);
             this.chkView.TabIndex = 20;
@@ -288,7 +314,9 @@
             // chkIndex
             // 
             this.chkIndex.AutoSize = true;
-            this.chkIndex.Location = new System.Drawing.Point(4, 72);
+            this.chkIndex.Checked = true;
+            this.chkIndex.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIndex.Location = new System.Drawing.Point(4, 52);
             this.chkIndex.Name = "chkIndex";
             this.chkIndex.Size = new System.Drawing.Size(52, 17);
             this.chkIndex.TabIndex = 21;
@@ -309,7 +337,9 @@
             // chkKey
             // 
             this.chkKey.AutoSize = true;
-            this.chkKey.Location = new System.Drawing.Point(3, 26);
+            this.chkKey.Checked = true;
+            this.chkKey.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkKey.Location = new System.Drawing.Point(4, 30);
             this.chkKey.Name = "chkKey";
             this.chkKey.Size = new System.Drawing.Size(44, 17);
             this.chkKey.TabIndex = 23;
@@ -359,7 +389,7 @@
             this.txtIpKaynak.Name = "txtIpKaynak";
             this.txtIpKaynak.Size = new System.Drawing.Size(184, 20);
             this.txtIpKaynak.TabIndex = 7;
-            this.txtIpKaynak.Text = "10.3.20.61";
+            this.txtIpKaynak.Text = "localhost";
             // 
             // btnBaglanKaynak
             // 
@@ -407,6 +437,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel2.Controls.Add(this.chkFunction);
+            this.panel2.Controls.Add(this.chkTrigger);
             this.panel2.Controls.Add(this.chkTable);
             this.panel2.Controls.Add(this.chkKey);
             this.panel2.Controls.Add(this.chkConstraint);
@@ -415,8 +447,33 @@
             this.panel2.Controls.Add(this.chkStoredProcedure);
             this.panel2.Location = new System.Drawing.Point(568, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(165, 140);
+            this.panel2.Size = new System.Drawing.Size(165, 194);
             this.panel2.TabIndex = 25;
+            // 
+            // chkFunction
+            // 
+            this.chkFunction.AutoSize = true;
+            this.chkFunction.Checked = true;
+            this.chkFunction.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFunction.Location = new System.Drawing.Point(4, 162);
+            this.chkFunction.Name = "chkFunction";
+            this.chkFunction.Size = new System.Drawing.Size(67, 17);
+            this.chkFunction.TabIndex = 25;
+            this.chkFunction.Text = "Function";
+            this.chkFunction.UseVisualStyleBackColor = true;
+            // 
+            // chkTrigger
+            // 
+            this.chkTrigger.AutoSize = true;
+            this.chkTrigger.Checked = true;
+            this.chkTrigger.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTrigger.Location = new System.Drawing.Point(4, 96);
+            this.chkTrigger.Name = "chkTrigger";
+            this.chkTrigger.Size = new System.Drawing.Size(59, 17);
+            this.chkTrigger.TabIndex = 24;
+            this.chkTrigger.Text = "Trigger";
+            this.chkTrigger.UseVisualStyleBackColor = true;
+            this.chkTrigger.CheckedChanged += new System.EventHandler(this.chkTrigger_CheckedChanged);
             // 
             // panel3
             // 
@@ -460,7 +517,7 @@
             this.txtIpHedef.Name = "txtIpHedef";
             this.txtIpHedef.Size = new System.Drawing.Size(184, 20);
             this.txtIpHedef.TabIndex = 7;
-            this.txtIpHedef.Text = "10.3.20.61";
+            this.txtIpHedef.Text = "localhost";
             // 
             // label8
             // 
@@ -498,9 +555,10 @@
             // btnRunExecSql
             // 
             this.btnRunExecSql.BackColor = System.Drawing.Color.Red;
+            this.btnRunExecSql.Enabled = false;
             this.btnRunExecSql.Location = new System.Drawing.Point(1476, 147);
             this.btnRunExecSql.Name = "btnRunExecSql";
-            this.btnRunExecSql.Size = new System.Drawing.Size(117, 59);
+            this.btnRunExecSql.Size = new System.Drawing.Size(123, 59);
             this.btnRunExecSql.TabIndex = 26;
             this.btnRunExecSql.Text = "Script Çalıştır";
             this.btnRunExecSql.UseVisualStyleBackColor = false;
@@ -509,12 +567,32 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel4.Controls.Add(this.chkKolonBoyutuBuyukse);
             this.panel4.Controls.Add(this.txtTableSearch);
             this.panel4.Controls.Add(this.chkTileBaslayanlar);
             this.panel4.Location = new System.Drawing.Point(739, 12);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(165, 140);
+            this.panel4.Size = new System.Drawing.Size(193, 194);
             this.panel4.TabIndex = 26;
+            // 
+            // chkKolonBoyutuBuyukse
+            // 
+            this.chkKolonBoyutuBuyukse.AutoSize = true;
+            this.chkKolonBoyutuBuyukse.Checked = true;
+            this.chkKolonBoyutuBuyukse.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkKolonBoyutuBuyukse.Location = new System.Drawing.Point(3, 52);
+            this.chkKolonBoyutuBuyukse.Name = "chkKolonBoyutuBuyukse";
+            this.chkKolonBoyutuBuyukse.Size = new System.Drawing.Size(168, 17);
+            this.chkKolonBoyutuBuyukse.TabIndex = 21;
+            this.chkKolonBoyutuBuyukse.Text = "Kolon Uzunluğu Büyük olanlar";
+            this.chkKolonBoyutuBuyukse.UseVisualStyleBackColor = true;
+            // 
+            // txtTableSearch
+            // 
+            this.txtTableSearch.Location = new System.Drawing.Point(3, 26);
+            this.txtTableSearch.Name = "txtTableSearch";
+            this.txtTableSearch.Size = new System.Drawing.Size(168, 20);
+            this.txtTableSearch.TabIndex = 20;
             // 
             // chkTileBaslayanlar
             // 
@@ -528,19 +606,75 @@
             this.chkTileBaslayanlar.Text = "T ile başlayan tablolar";
             this.chkTileBaslayanlar.UseVisualStyleBackColor = true;
             // 
-            // txtTableSearch
+            // lblProsedurFarki
             // 
-            this.txtTableSearch.Location = new System.Drawing.Point(3, 26);
-            this.txtTableSearch.Name = "txtTableSearch";
-            this.txtTableSearch.Size = new System.Drawing.Size(159, 20);
-            this.txtTableSearch.TabIndex = 20;
+            this.lblProsedurFarki.AutoSize = true;
+            this.lblProsedurFarki.Location = new System.Drawing.Point(1069, 46);
+            this.lblProsedurFarki.Name = "lblProsedurFarki";
+            this.lblProsedurFarki.Size = new System.Drawing.Size(81, 13);
+            this.lblProsedurFarki.TabIndex = 27;
+            this.lblProsedurFarki.Text = "Prosedür farkı : ";
+            // 
+            // lblViewFarki
+            // 
+            this.lblViewFarki.AutoSize = true;
+            this.lblViewFarki.Location = new System.Drawing.Point(1069, 63);
+            this.lblViewFarki.Name = "lblViewFarki";
+            this.lblViewFarki.Size = new System.Drawing.Size(62, 13);
+            this.lblViewFarki.TabIndex = 28;
+            this.lblViewFarki.Text = "View farkı : ";
+            // 
+            // lblFunctionFarki
+            // 
+            this.lblFunctionFarki.AutoSize = true;
+            this.lblFunctionFarki.Location = new System.Drawing.Point(1069, 80);
+            this.lblFunctionFarki.Name = "lblFunctionFarki";
+            this.lblFunctionFarki.Size = new System.Drawing.Size(80, 13);
+            this.lblFunctionFarki.TabIndex = 29;
+            this.lblFunctionFarki.Text = "Function farkı : ";
+            // 
+            // btnConstraintUpdate
+            // 
+            this.btnConstraintUpdate.Location = new System.Drawing.Point(938, 143);
+            this.btnConstraintUpdate.Name = "btnConstraintUpdate";
+            this.btnConstraintUpdate.Size = new System.Drawing.Size(119, 64);
+            this.btnConstraintUpdate.TabIndex = 30;
+            this.btnConstraintUpdate.Text = "Toplu Constraint Güncelleme";
+            this.btnConstraintUpdate.UseVisualStyleBackColor = true;
+            this.btnConstraintUpdate.Click += new System.EventHandler(this.btnConstraintUpdate_Click);
+            // 
+            // chkHepsi
+            // 
+            this.chkHepsi.AutoSize = true;
+            this.chkHepsi.Location = new System.Drawing.Point(1063, 190);
+            this.chkHepsi.Name = "chkHepsi";
+            this.chkHepsi.Size = new System.Drawing.Size(53, 17);
+            this.chkHepsi.TabIndex = 31;
+            this.chkHepsi.Text = "Hepsi";
+            this.chkHepsi.UseVisualStyleBackColor = true;
+            this.chkHepsi.CheckedChanged += new System.EventHandler(this.chkHepsi_CheckedChanged);
+            // 
+            // lblTriggerFarki
+            // 
+            this.lblTriggerFarki.AutoSize = true;
+            this.lblTriggerFarki.Location = new System.Drawing.Point(1069, 97);
+            this.lblTriggerFarki.Name = "lblTriggerFarki";
+            this.lblTriggerFarki.Size = new System.Drawing.Size(72, 13);
+            this.lblTriggerFarki.TabIndex = 32;
+            this.lblTriggerFarki.Text = "Trigger farkı : ";
             // 
             // Form1
             // 
             this.AcceptButton = this.btnCompare;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1605, 752);
+            this.ClientSize = new System.Drawing.Size(1611, 752);
+            this.Controls.Add(this.lblTriggerFarki);
+            this.Controls.Add(this.chkHepsi);
+            this.Controls.Add(this.btnConstraintUpdate);
+            this.Controls.Add(this.lblFunctionFarki);
+            this.Controls.Add(this.lblViewFarki);
+            this.Controls.Add(this.lblProsedurFarki);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.btnRunExecSql);
             this.Controls.Add(this.panel3);
@@ -620,6 +754,15 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckBox chkTileBaslayanlar;
         private System.Windows.Forms.TextBox txtTableSearch;
+        private System.Windows.Forms.CheckBox chkKolonBoyutuBuyukse;
+        private System.Windows.Forms.CheckBox chkTrigger;
+        private System.Windows.Forms.CheckBox chkFunction;
+        private System.Windows.Forms.Label lblProsedurFarki;
+        private System.Windows.Forms.Label lblViewFarki;
+        private System.Windows.Forms.Label lblFunctionFarki;
+        private System.Windows.Forms.Button btnConstraintUpdate;
+        private System.Windows.Forms.CheckBox chkHepsi;
+        private System.Windows.Forms.Label lblTriggerFarki;
     }
 }
 

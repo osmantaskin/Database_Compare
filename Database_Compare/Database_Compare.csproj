@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompareForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompareForm.Designer.cs">
+      <DependentUpon>CompareForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\DB.cs" />
     <Compile Include="File\tLog.cs" />
     <Compile Include="Form1.cs">
@@ -61,9 +67,13 @@
     </Compile>
     <Compile Include="Model\Columns.cs" />
     <Compile Include="Model\DBModel.cs" />
+    <Compile Include="Model\GeneralModel.cs" />
     <Compile Include="Model\TableNames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CompareForm.resx">
+      <DependentUpon>CompareForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

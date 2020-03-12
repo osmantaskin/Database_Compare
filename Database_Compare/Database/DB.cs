@@ -1,12 +1,8 @@
 ﻿using Database_Compare.File;
 using Database_Compare.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Database_Compare.Database
@@ -24,6 +20,10 @@ namespace Database_Compare.Database
             if (sql == "") return null;
             string message = "";
             string Conn = string.Format($"Server={dbModel.Ip};Database={DatabaseName};UID={dbModel.UserName};PWD={dbModel.Password};MultipleActiveResultSets=True;Connection Timeout=10;");
+            if (dbModel.Ip == "localhost")
+            {
+                Conn = string.Format($"Server={dbModel.Ip};Database={DatabaseName};UID={dbModel.UserName};PWD={dbModel.Password};MultipleActiveResultSets=True;Integrated Security=True;Connection Timeout=10;");
+            }
             SqlDataAdapter adapter = null;
             SqlConnection conn = new SqlConnection(Conn);
             DataTable dt = null;
@@ -50,8 +50,13 @@ namespace Database_Compare.Database
 
         static public bool ExecSql(string sql, string DatabaseName, DBModel dbModel, ref string ErrMsg)
         {
+            Clipboard.SetText(sql);
             bool status = false;
             string Conn = string.Format($"Server={dbModel.Ip};Database={DatabaseName};UID={dbModel.UserName};PWD={dbModel.Password};MultipleActiveResultSets=True;Connection Timeout=10;");
+            if (dbModel.Ip == "localhost")
+            {
+                Conn = string.Format($"Server={dbModel.Ip};Database={DatabaseName};UID={dbModel.UserName};PWD={dbModel.Password};MultipleActiveResultSets=True;Integrated Security=True;Connection Timeout=10;");
+            }
             SqlConnection connection = new SqlConnection(Conn);
             connection.Open();
             SqlCommand command = connection.CreateCommand();
@@ -64,15 +69,25 @@ namespace Database_Compare.Database
             {
                 try
                 {
-                    command.CommandText = DateFormat + sql;
+                    command.CommandText = sql;
                     command.ExecuteNonQuery();
                     //transaction.Commit();
                     status = true;
+
+                    //string[] commands = sql.Split(new string[] { "GO\r\n", "GO ", "GO\t" }, StringSplitOptions.RemoveEmptyEntries);
+                    //foreach (string c in commands)
+                    //{
+                    //    command = new SqlCommand(c, connection);
+                    //    command.ExecuteNonQuery();
+                    //}
+                    //status = true;
+                    tLog.LogType(sql, DateTime.Now.ToString("dd.MM.yyy") + "_" + DatabaseName);
                 }
                 catch (Exception ex)
                 {
                     string msg = sql + "\r\nMessage= " + ex.Message + "\r\nStack Trace= " + ex.StackTrace + ex.StackTrace + "\r\nIp= " + dbModel.Ip;
-                    ErrMsg = "Sql= " + sql + "\r\nMessage= " + ex.Message + "\r\nIp= " + dbModel.Ip;
+                    //ErrMsg = "Sql= " + sql + "\r\nMessage= " + ex.Message + "\r\nIp= " + dbModel.Ip;
+                    ErrMsg = "\r\nMessage= " + ex.Message + "\r\nIp= " + dbModel.Ip;
                     tLog.LogType(msg, "ERROR");
                     status = false;
                     try
