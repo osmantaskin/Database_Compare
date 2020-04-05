@@ -157,7 +157,7 @@ namespace Database_Compare
                 string whereTrigger = "";
                 string whereForeignKey = "";
 
-                //txtTableSearch.Text = "tCity";
+                //txtTableSearch.Text = "tUser";
 
                 if (chkTileBaslayanlar.Checked)
                 {
@@ -702,7 +702,17 @@ namespace Database_Compare
 
                         string TRIGGER_DEFINITION = Convert.ToString(row1["TRIGGER_DEFINITION"]).TrimStart().TrimEnd();
                         //tableNames.TriggerDefinitionList.Add(TRIGGER_DEFINITION);
+                        //int start = TRIGGER_DEFINITION.IndexOf("/******");
+                        //int finish = TRIGGER_DEFINITION.IndexOf("******/");
 
+                        //if (start != -1 && finish != -1)
+                        //{
+                        //    TRIGGER_DEFINITION = TRIGGER_DEFINITION.Remove(start, finish + 7);
+                        //}
+
+                        int finish = TRIGGER_DEFINITION.IndexOf("CREATE TRIGGER");
+
+                        TRIGGER_DEFINITION = TRIGGER_DEFINITION.Remove(0, finish);
 
                         GeneralModel generalModel = new GeneralModel();
                         generalModel.Name = TRIGGERNAME;
