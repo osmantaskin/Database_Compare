@@ -157,7 +157,7 @@ namespace Database_Compare
                 string whereTrigger = "";
                 string whereForeignKey = "";
 
-                //txtTableSearch.Text = "tUser";
+                //txtTableSearch.Text = "tDistParam";
 
                 if (chkTileBaslayanlar.Checked)
                 {
@@ -710,9 +710,22 @@ namespace Database_Compare
                         //    TRIGGER_DEFINITION = TRIGGER_DEFINITION.Remove(start, finish + 7);
                         //}
 
-                        int finish = TRIGGER_DEFINITION.IndexOf("CREATE TRIGGER");
+                        try
+                        {
+                            int finish = TRIGGER_DEFINITION.IndexOf("CREATE TRIGGER");
+                            if (finish == -1)
+                            {
+                                TRIGGER_DEFINITION = TRIGGER_DEFINITION.Replace("create TRIGGER", "CREATE TRIGGER");
+                                finish = TRIGGER_DEFINITION.IndexOf("CREATE TRIGGER");
+                            }
 
-                        TRIGGER_DEFINITION = TRIGGER_DEFINITION.Remove(0, finish);
+                            if (finish != -1)
+                                TRIGGER_DEFINITION = TRIGGER_DEFINITION.Remove(0, finish);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("TRIGGER_DEFINITION ERROR\r\n" + ex.Message, "ERROR");
+                        }
 
                         GeneralModel generalModel = new GeneralModel();
                         generalModel.Name = TRIGGERNAME;
