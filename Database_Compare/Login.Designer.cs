@@ -95,7 +95,6 @@
             this.txtIp.Name = "txtIp";
             this.txtIp.Size = new System.Drawing.Size(184, 20);
             this.txtIp.TabIndex = 0;
-            this.txtIp.Text = "10.3.20.61";
             // 
             // Login
             // 
